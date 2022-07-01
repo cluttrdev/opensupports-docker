@@ -6,7 +6,7 @@ Docker container for OpenSupports
 Firstly, create new folder and download `docker-compose.yml`
 ```bash
 mkdir opensupports
-wget https://raw.githubusercontent.com/gamelaster/opensupports-docker/master/docker-compose.yml
+wget https://raw.githubusercontent.com/cluttrdev/opensupports-docker/main/docker-compose.yml
 ```
 After, open `docker-compose.yml`, and change `MYSQL_PASSWORD=changeme` line with your unique password. Then run the compose:
 ```bash

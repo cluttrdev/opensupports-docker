@@ -1,6 +1,6 @@
-diff --git a/index.php b/index.php
-index 5b074a6..674cee0 100755
---- a/index.php
+diff --git a/index.php.orig b/index.php
+index 8d1b211..e274ac7 100644
+--- a/index.php.orig
 +++ b/index.php
 @@ -1,6 +1,23 @@
  <?php
@@ -23,7 +23,7 @@ index 5b074a6..674cee0 100755
      $path = rtrim(str_replace('\\','/',dirname($_SERVER['PHP_SELF'])), '/');
 -    $url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $path;
 +    $url_host = getenv("HOST", false) !== false ? getenv("HOST", false) : $_SERVER['HTTP_HOST'];
-+    $url = ( isHttps() ? 'https://' : 'http://' ) . $url_host . $path;
++    $url = ( isHttps() ? 'https://' : 'http://'  ) . $url_host . $path;
+     header('X-Frame-Options: DENY');
  ?>
  <!doctype html>
- <html class="no-js" lang="">
