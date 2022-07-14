@@ -1,6 +1,7 @@
 version: "2.1"
 services:
   mariadb:
+    container_name: opensupports-db
     image: mariadb
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE:-opensupports}
@@ -11,6 +12,7 @@ services:
       - ./database:/var/lib/mysql
 
   opensupports:
+    container_name: opensupports
     image: cluttrdev/opensupports:4.11.0
     restart: always
     ports:

@@ -1,0 +1,29 @@
+From c365d96d3003348f943a30451de0896566b0c54d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?N=C3=ADcolas=20Castillo?= <ncastilloraggio@gmail.com>
+Date: Mon, 14 Feb 2022 22:30:54 -0500
+Subject: [PATCH] Fixed e-mail reply polling
+
+---
+ server/controllers/system/email-polling.php | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/server/controllers/system/email-polling.php b/server/controllers/system/email-polling.php
+index 7a7ed8d7f..f511e360a 100755
+--- a/server/controllers/system/email-polling.php
++++ b/server/controllers/system/email-polling.php
+@@ -83,9 +83,12 @@ public function handler() {
+ 
+             try {
+                 if($email->isReply()) {
+-                    if($email->getTicket()->authorToArray()['email'] === $email->getSender()) {
++                    $ticketAuthor = $email->getTicket()->authorToArray();
++                    if($ticketAuthor['email'] === $email->getSender()) {
+                         $session->clearSessionData();
+-                        $session->createTicketSession($email->getTicket()->ticketNumber);
++                        $session->createSession($ticketAuthor['id'],
++                                                $ticketAuthor['staff'],
++                                                $email->getTicket()->ticketNumber);
+ 
+                         $commentController->handler();
+                     }
+
